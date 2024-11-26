@@ -605,7 +605,3 @@
 #ifndef USER_PARAMS_ENABLED
   #define USER_PARAMS_ENABLED 0
 #endif
-
-#ifndef MODE_MYFIRST_ENABLED
-  #define MODE_MYFIRST_ENABLED 1
-#endif
