@@ -216,7 +216,12 @@ public:
     friend class ModeRTL;
     friend class ModeSmartRTL;
     friend class ModeSport;
+#if MODE_MYFIRST_ENABLED
     friend class ModeMyfirst;
+#endif
+#if MODE_ALT_HOLD_SIMPLE_ENABLED
+    friend class ModeAltHoldSimple;
+#endif
     friend class ModeStabilize;
     friend class ModeStabilize_Heli;
     friend class ModeSystemId;
@@ -1043,6 +1048,9 @@ private:
 #endif
 #if MODE_MYFIRST_ENABLED
     ModeMyfirst mode_myfirst;
+#endif
+#if MODE_ALT_HOLD_SIMPLE_ENABLED
+    ModeAltHoldSimple mode_althold_simple;
 #endif
 #if FRAME_CONFIG == HELI_FRAME
     ModeStabilize_Heli mode_stabilize;

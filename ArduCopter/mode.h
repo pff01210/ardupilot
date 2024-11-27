@@ -101,6 +101,8 @@ public:
         AUTO_RTL =     27,  // Auto RTL, this is not a true mode, AUTO will report as this mode if entered to perform a DO_LAND_START Landing sequence
         TURTLE =       28,  // Flip over after crash
         MYFIRST =      99,  // My first flight mode
+        ALT_HOLD_SIMPLE = 100,  // ALT_HOLD_SIMPLE mode
+        LOITER_SUPER_SIMPLE = 101,  // LOITER_SUPER_SIMPLE mode
 
         // Mode number 127 reserved for the "drone show mode" in the Skybrush
         // fork at https://github.com/skybrush-io/ardupilot
@@ -491,6 +493,37 @@ protected:
 
     const char *name() const override { return "ALT_HOLD"; }
     const char *name4() const override { return "ALTH"; }
+
+private:
+
+};
+
+class ModeAltHoldSimple : public Mode {
+
+public:
+    // inherit constructor
+    using Mode::Mode;
+    Number mode_number() const override { return Number::ALT_HOLD_SIMPLE; }
+
+    bool init(bool ignore_checks) override;
+    void run() override;
+
+    bool requires_GPS() const override { return false; }
+    bool has_manual_throttle() const override { return false; }
+    bool allows_arming(AP_Arming::Method method) const override { return true; };
+    bool is_autopilot() const override { return false; }
+    bool has_user_takeoff(bool must_navigate) const override {
+        return !must_navigate;
+    }
+    bool allows_autotune() const override { return true; }
+    bool allows_flip() const override { return true; }
+#if FRAME_CONFIG == HELI_FRAME
+    bool allows_inverted() const override { return true; };
+#endif
+protected:
+
+    const char *name() const override { return "ALT_HOLD_SIMPLE"; }
+    const char *name4() const override { return "ATHS"; }
 
 private:
 
@@ -1320,7 +1353,6 @@ private:
 #endif
 
 };
-
 
 class ModePosHold : public Mode {
 
