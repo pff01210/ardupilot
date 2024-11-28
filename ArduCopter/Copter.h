@@ -222,6 +222,9 @@ public:
 #if MODE_ALT_HOLD_SIMPLE_ENABLED
     friend class ModeAltHoldSimple;
 #endif
+#if MODE_LOITER_SUPER_SIMPLE_ENABLED
+    friend class ModeLoiterSuperSimple;
+#endif
     friend class ModeStabilize;
     friend class ModeStabilize_Heli;
     friend class ModeSystemId;
@@ -1051,6 +1054,9 @@ private:
 #endif
 #if MODE_ALT_HOLD_SIMPLE_ENABLED
     ModeAltHoldSimple mode_althold_simple;
+#endif
+#if MODE_LOITER_SUPER_SIMPLE_ENABLED
+    ModeLoiterSuperSimple mode_loiter_super_simple;
 #endif
 #if FRAME_CONFIG == HELI_FRAME
     ModeStabilize_Heli mode_stabilize;

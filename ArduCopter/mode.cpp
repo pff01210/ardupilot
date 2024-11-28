@@ -51,6 +51,11 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 	    ret = &mode_althold_simple;
 	    break;
 #endif
+#if MODE_LOITER_SUPER_SIMPLE_ENABLED
+	case Mode::Number::LOITER_SUPER_SIMPLE:
+	    ret = &mode_loiter_super_simple;
+	    break;
+#endif
         case Mode::Number::STABILIZE:
             ret = &mode_stabilize;
             break;
