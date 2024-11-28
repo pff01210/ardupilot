@@ -507,6 +507,7 @@ public:
     Number mode_number() const override { return Number::ALT_HOLD_SIMPLE; }
 
     bool init(bool ignore_checks) override;
+    void exit() override;
     void run() override;
 
     bool requires_GPS() const override { return false; }
@@ -527,7 +528,7 @@ protected:
     const char *name4() const override { return "ATHS"; }
 
 private:
-
+    bool change_simple_mode_enabled = false;
 };
 #endif	// MODE_ALT_HOLD_SIMPLE_ENABLED
 
@@ -1365,6 +1366,7 @@ public:
     Number mode_number() const override { return Number::LOITER_SUPER_SIMPLE; }
 
     bool init(bool ignore_checks) override;
+    void exit() override;
     void run() override;
 
     bool requires_GPS() const override { return true; }
@@ -1397,6 +1399,7 @@ protected:
 #endif
 
 private:
+    bool change_simple_mode_enabled = false;
 
 #if AC_PRECLAND_ENABLED
     bool _precision_loiter_enabled;
