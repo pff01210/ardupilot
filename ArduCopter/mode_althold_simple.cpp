@@ -8,8 +8,8 @@
 // althold_init - initialise althold controller
 bool ModeAltHoldSimple::init(bool ignore_checks)
 {
-    // force set to SIMPLE
-    change_simple_mode_enabled = true;
+    // set delay cnt change SIMPLE
+    delay_change_mode = 100;
 
     // initialise the vertical position controller
     if (!pos_control->is_active_z()) {
@@ -31,10 +31,13 @@ void ModeAltHoldSimple::run()
     pos_control->set_max_speed_accel_z(-get_pilot_speed_dn(), g.pilot_speed_up, g.pilot_accel_z);
     
     // force change SIMPLE
-    if(change_simple_mode_enabled || copter.simple_mode!=Copter::SimpleMode::SIMPLE) {
-        gcs().send_text(MAV_SEVERITY_INFO, "init:force called set_simple_mode(SIMPLE)");
+    if( delay_change_mode > 0 ) {
+        delay_change_mode--;
+    }
+    else if( 0 == delay_change_mode ) {
         copter.set_simple_mode(Copter::SimpleMode::SIMPLE);
-        change_simple_mode_enabled = false;
+        GCS_SEND_TEXT(MAV_SEVERITY_CRITICAL, "set SIMPLE");
+        delay_change_mode--;
     }
 
     // apply SIMPLE mode transform to pilot inputs
@@ -116,7 +119,6 @@ void ModeAltHoldSimple::run()
 void ModeAltHoldSimple::exit()
 {
     // force reset simple mode to NONE
-    gcs().send_text(MAV_SEVERITY_INFO, "exit:force called set_simple_mode()");
     copter.set_simple_mode(Copter::SimpleMode::NONE);
-    change_simple_mode_enabled = false;
+    GCS_SEND_TEXT(MAV_SEVERITY_CRITICAL, "ModeAltHoldSimple::exit()");
 }

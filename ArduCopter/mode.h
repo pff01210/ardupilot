@@ -528,7 +528,7 @@ protected:
     const char *name4() const override { return "ATHS"; }
 
 private:
-    bool change_simple_mode_enabled = false;
+    int32_t delay_change_mode;
 };
 #endif	// MODE_ALT_HOLD_SIMPLE_ENABLED
 
@@ -1399,7 +1399,7 @@ protected:
 #endif
 
 private:
-    bool change_simple_mode_enabled = false;
+    int32_t delay_change_mode;
 
 #if AC_PRECLAND_ENABLED
     bool _precision_loiter_enabled;
