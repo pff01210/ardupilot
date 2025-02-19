@@ -32,7 +32,6 @@ PayloadPlace Mode::payload_place;
 // return the static controller object corresponding to supplied mode
 Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 {
-
     switch (mode) {
 #if MODE_ACRO_ENABLED
         case Mode::Number::ACRO:
@@ -41,18 +40,15 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 
 #if MODE_MYFIRST_ENABLED
 	case Mode::Number::MYFIRST:
-	    ret = &mode_myfirst;
-	    break;
+	    return &mode_myfirst;
 #endif
 #if MODE_ALT_HOLD_SIMPLE_ENABLED
 	case Mode::Number::ALT_HOLD_SIMPLE:
-	    ret = &mode_althold_simple;
-	    break;
+	    return &mode_althold_simple;
 #endif
 #if MODE_LOITER_SUPER_SIMPLE_ENABLED
 	case Mode::Number::LOITER_SUPER_SIMPLE:
-	    ret = &mode_loiter_super_simple;
-	    break;
+	    return &mode_loiter_super_simple;
 #endif
         case Mode::Number::STABILIZE:
             return &mode_stabilize;
