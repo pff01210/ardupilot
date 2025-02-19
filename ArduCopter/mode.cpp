@@ -41,7 +41,7 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 
 #if MODE_MYFIRST_ENABLED
 	case Mode::Number::MYFIRST:
-	    ret = &mode_myfirst;
+	    return &mode_myfirst;
 	    break;
 #endif
 
