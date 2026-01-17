@@ -72,6 +72,7 @@
 #include <AP_OpticalFlow/AP_OpticalFlow.h>
 #include <AP_Winch/AP_Winch_config.h>
 #include <AP_SurfaceDistance/AP_SurfaceDistance.h>
+#include <AP_Generator/AP_Generator.h>
 
 // Configuration
 #include "defines.h"
@@ -189,6 +190,9 @@ public:
     friend class AP_Arming_Copter;
 #if AP_EXTERNAL_CONTROL_ENABLED
     friend class AP_ExternalControl_Copter;
+#endif
+#if HAL_GENERATOR_ENABLED
+    friend class AP_Generator;
 #endif
     friend class ToyMode;
     friend class RC_Channel_Copter;
@@ -317,7 +321,6 @@ private:
 #if AP_EXTERNAL_CONTROL_ENABLED
     AP_ExternalControl_Copter external_control;
 #endif
-
 
     // system time in milliseconds of last recorded yaw reset from ekf
     uint32_t ekfYawReset_ms;
