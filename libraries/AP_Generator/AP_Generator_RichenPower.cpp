@@ -46,6 +46,7 @@ void AP_Generator_RichenPower::init()
     _frontend._has_current = true;
     _frontend._has_consumed_energy = false;
     _frontend._has_fuel_remaining = false;
+    _fuel_remaining = 1.0f;
 }
 
 // find a RichenPower message in the buffer, starting at
@@ -224,6 +225,15 @@ void AP_Generator_RichenPower::check_maintenance_required()
 */
 void AP_Generator_RichenPower::update(void)
 {
+    _fuel_remaining -= 0.01;
+    if (_fuel_remaining < 0.1f) {
+        static int cnt = 100;
+        if ( (cnt % 100)==0 ) {
+            GCS_SEND_TEXT(MAV_SEVERITY_WARNING, "Fuel will be empty in 10 minutes");
+        }
+        cnt++;
+    }
+
     if (uart == nullptr) {
         return;
     }
