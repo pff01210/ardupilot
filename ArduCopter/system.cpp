@@ -181,12 +181,6 @@ void Copter::init_ardupilot()
     custom_control.init();
 #endif
 
-#if HAL_GENERATOR_ENABLED
-    if (AP::generator() != nullptr) {
-        AP::generator()->init();
-    }
-#endif
-
     // set landed flags
     set_land_complete(true);
     set_land_complete_maybe(true);
